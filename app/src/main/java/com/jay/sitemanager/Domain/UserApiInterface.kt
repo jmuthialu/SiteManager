@@ -5,6 +5,6 @@ import retrofit2.http.GET
 
 interface UserApiInterface {
     @GET("users")
-    suspend fun getUsers(): List<RemoteUser>
+    suspend fun getRemoteUsers(): List<RemoteUser>
 
 }

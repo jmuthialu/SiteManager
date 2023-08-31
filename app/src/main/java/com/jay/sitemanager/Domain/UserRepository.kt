@@ -16,7 +16,7 @@ class UserRepository @Inject constructor(
         return withContext(Dispatchers.IO) {
             var users = emptyList<RemoteUser>()
             try {
-                users = userApiInterface.getUsers()
+                users = userApiInterface.getRemoteUsers()
             } catch (e: Exception) {
                 Log.d("$$$", "Exception: ${e.message}")
             }

@@ -1,5 +1,6 @@
 package com.jay.sitemanager
 
+import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -18,6 +19,7 @@ import com.jay.sitemanager.presentation.UserListViewModel
 import com.jay.sitemanager.presentation.UsersListView
 import com.jay.sitemanager.ui.theme.SiteManagerTheme
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.internal.Contexts.getApplication
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -29,7 +31,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    SiteManagerNavigation()
+                    val context = getApplication().applicationContext
+                    SiteManagerNavigation(context = context)
                 }
             }
         }
@@ -37,12 +40,12 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun SiteManagerNavigation() {
+fun SiteManagerNavigation(context: Context) {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "usersList") {
         composable(route = "usersList") {
             val viewModel: UserListViewModel = hiltViewModel()
-            viewModel.getUsers()
+            viewModel.getLocalUsers(context = context)
             UsersListView(usersState = viewModel.usersState.value)
         }
     }
