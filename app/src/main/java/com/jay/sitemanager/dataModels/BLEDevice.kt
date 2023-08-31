@@ -1,4 +1,4 @@
-package com.jay.sitemanager.ble
+package com.jay.sitemanager.dataModels
 
 data class BLEDevice(
     val address: String?,

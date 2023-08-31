@@ -1,8 +1,7 @@
-package com.jay.sitemanager.Domain
+package com.jay.sitemanager.domain
 
-import android.app.appsearch.SearchResults
 import android.util.Log
-import com.jay.sitemanager.DataModels.RemoteUser
+import com.jay.sitemanager.dataModels.RemoteUser
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

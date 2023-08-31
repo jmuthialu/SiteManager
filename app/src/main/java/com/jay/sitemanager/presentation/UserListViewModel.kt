@@ -7,8 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.jay.sitemanager.DataModels.RemoteUser
-import com.jay.sitemanager.Domain.UserRepository
+import com.jay.sitemanager.dataModels.RemoteUser
+import com.jay.sitemanager.domain.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch

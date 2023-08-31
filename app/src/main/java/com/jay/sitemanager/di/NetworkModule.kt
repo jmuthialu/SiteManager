@@ -1,6 +1,6 @@
 package com.jay.sitemanager.di
 
-import com.jay.sitemanager.Domain.UserApiInterface
+import com.jay.sitemanager.domain.UserApiInterface
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

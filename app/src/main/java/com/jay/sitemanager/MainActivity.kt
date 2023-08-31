@@ -69,7 +69,7 @@ fun SiteManagerNavigation(context: Context) {
     NavHost(navController = navController, startDestination = "usersList") {
         composable(route = "usersList") {
             val viewModel: UserListViewModel = hiltViewModel()
-            viewModel.getLocalUsers(context = context)
+            viewModel.getRemoteUsers()
             UsersListView(usersState = viewModel.usersState.value)
         }
     }
