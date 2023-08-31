@@ -18,10 +18,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
-import com.jay.sitemanager.DataModels.User
+import com.jay.sitemanager.DataModels.RemoteUser
 
 @Composable
-fun UsersListView(usersState: List<User>) {
+fun UsersListView(usersState: List<RemoteUser>) {
     LazyColumn(
         contentPadding = PaddingValues (
             vertical = 10.dp,
@@ -35,7 +35,7 @@ fun UsersListView(usersState: List<User>) {
 }
 
 @Composable
-fun UserItem(item: User) {
+fun UserItem(item: RemoteUser) {
     Card(
         modifier = Modifier.padding(10.dp)
     ) {

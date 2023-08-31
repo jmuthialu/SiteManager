@@ -1,6 +1,6 @@
 package com.jay.sitemanager.DataModels
 
-data class User(
+data class RemoteUser(
     val id: Int?,
     val name: String?,
     val username: String?,
