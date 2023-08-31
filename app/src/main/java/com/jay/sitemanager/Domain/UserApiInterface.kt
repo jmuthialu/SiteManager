@@ -4,8 +4,7 @@ import com.jay.sitemanager.DataModels.User
 import retrofit2.http.GET
 
 interface UserApiInterface {
-
-    @GET("photos")
+    @GET("users")
     suspend fun getUsers(): List<User>
 
 }

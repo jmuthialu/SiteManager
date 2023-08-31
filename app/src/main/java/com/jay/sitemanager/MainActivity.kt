@@ -10,6 +10,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.jay.sitemanager.presentation.UserListViewModel
+import com.jay.sitemanager.presentation.UsersListView
 import com.jay.sitemanager.ui.theme.SiteManagerTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,7 +29,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    SiteManagerNavigation()
                 }
             }
         }
@@ -31,17 +37,13 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    SiteManagerTheme {
-        Greeting("Android")
+fun SiteManagerNavigation() {
+    val navController = rememberNavController()
+    NavHost(navController = navController, startDestination = "usersList") {
+        composable(route = "usersList") {
+            val viewModel: UserListViewModel = hiltViewModel()
+            viewModel.getUsers()
+            UsersListView(usersState = viewModel.usersState.value)
+        }
     }
 }
