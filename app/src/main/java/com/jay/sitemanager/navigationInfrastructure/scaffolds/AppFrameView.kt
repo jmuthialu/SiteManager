@@ -22,6 +22,8 @@ import kotlinx.coroutines.InternalCoroutinesApi
     InternalCoroutinesApi::class, ExperimentalMaterial3Api::class
 )
 @Composable
+
+// Context refers to application context which is used to load and parse local JSON file
 fun AppFrameView(context: Context, bleFacade: BLEFacade) {
 
     val navController = rememberNavController()
