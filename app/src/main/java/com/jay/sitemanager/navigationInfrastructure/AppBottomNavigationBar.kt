@@ -19,6 +19,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.jay.sitemanager.AppConstants
 import com.jay.sitemanager.R
+import com.jay.sitemanager.presentation.components.IconPainter
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.InternalCoroutinesApi
@@ -42,13 +43,7 @@ fun AppBottomNavigationBar(
 
         items.forEach { item ->
             BottomNavigationItem(
-                icon = {
-                    Icon(
-                        painter = painterResource(id = item.icon),
-                        contentDescription = null,
-                        tint = Color.White,
-                        modifier = Modifier.size(24.dp)
-                    ) },
+                icon = { IconPainter(id = item.icon, size = 24, tintColor = Color.White,) },
                 selected = currentRoute == item.route,
                 alwaysShowLabel = false,
                 onClick = {

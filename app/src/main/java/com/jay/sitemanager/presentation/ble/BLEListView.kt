@@ -35,6 +35,7 @@ import androidx.compose.ui.unit.dp
 import com.jay.sitemanager.AppConstants
 import com.jay.sitemanager.R
 import com.jay.sitemanager.dataModels.BLEDevice
+import com.jay.sitemanager.presentation.components.IconPainter
 import com.jay.sitemanager.presentation.components.IconRenderer
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -86,11 +87,7 @@ fun BLEDeviceItem(item: BLEDevice) {
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.padding(10.dp)
         ) {
-            Icon(
-                painter = painterResource(id = R.drawable.bluetooth),
-                contentDescription = null,
-                modifier = Modifier.size(24.dp)
-            )
+            IconPainter(id = R.drawable.bluetooth, size =24 )
             Spacer(modifier = Modifier.size(20.dp))
             BLECell(address = item.address,
                 rssi = item.rssi,
@@ -106,12 +103,7 @@ fun BLECell(address: String?, rssi: Int?, modifier: Modifier) {
         Text(text = (address ?: "no address" ), fontWeight = FontWeight.Bold)
         Spacer(modifier = Modifier.size(10.dp))
         Row {
-            Icon(
-                painter = painterResource(id = R.drawable.rssi),
-                contentDescription = null,
-                modifier = Modifier.size(20.dp)
-            )
-
+            IconPainter(id = R.drawable.rssi, size = 20)
             Spacer(modifier = Modifier.size(10.dp))
 
             Text(text = (rssi.toString() ?: "no rssi"), fontWeight = FontWeight.Bold)
