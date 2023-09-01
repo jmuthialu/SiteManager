@@ -30,6 +30,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.jay.sitemanager.AppConstants
 import com.jay.sitemanager.R
@@ -102,7 +103,7 @@ fun BLEDeviceItem(item: BLEDevice) {
 @Composable
 fun BLECell(address: String?, rssi: Int?, modifier: Modifier) {
     Column(modifier = modifier) {
-        Text(text = (address ?: "no address" ), style = MaterialTheme.typography.bodyMedium)
+        Text(text = (address ?: "no address" ), fontWeight = FontWeight.Bold)
         Spacer(modifier = Modifier.size(10.dp))
         Row {
             Icon(
@@ -113,7 +114,7 @@ fun BLECell(address: String?, rssi: Int?, modifier: Modifier) {
 
             Spacer(modifier = Modifier.size(10.dp))
 
-            Text(text = (rssi.toString() ?: "no rssi"), style = MaterialTheme.typography.bodySmall)
+            Text(text = (rssi.toString() ?: "no rssi"), fontWeight = FontWeight.Bold)
         }
     }
 }

@@ -5,6 +5,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 
 @Composable
 fun UserCell(name: String?,
@@ -14,7 +15,7 @@ fun UserCell(name: String?,
              modifier: Modifier
 ) {
     Column(modifier = modifier) {
-        name.let { Text(text = it ?: "", style = MaterialTheme.typography.bodyMedium) }
+        name.let { Text(text = it ?: "", fontWeight = FontWeight.Bold) }
         userName.let { Text(text = it ?: "", style = MaterialTheme.typography.bodySmall) }
         email.let { Text(text = it ?: "", style = MaterialTheme.typography.bodySmall) }
         phone.let { Text(text = it ?: "", style = MaterialTheme.typography.bodySmall) }
