@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -16,6 +17,7 @@ import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -39,38 +41,35 @@ fun BLEListView(viewModel: BLEListViewModel, bottomModifier: Modifier) {
         }
     ) { topPadding ->
         Column(modifier = Modifier.padding(topPadding)) {
-            Row (
-                modifier = Modifier
-                    .padding(10.dp)
-                    .fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
-            )  {
-                Button(onClick = {
-                    viewModel.startScan()
-                }) {
-                    Text(text = "Start Scan")
+
+            BLEScanButtonsView(viewModel = viewModel)
+
+            if (viewModel.bleDevices.value.isNotEmpty()) {
+                LazyColumn(
+                    modifier = bottomModifier,
+                    contentPadding = PaddingValues(
+                        vertical = 10.dp,
+                        horizontal = 10.dp
+                    )
+                ) {
+                    Log.d(
+                        AppConstants.TAG,
+                        "bleDevices in view: ${viewModel.bleDevices.value.size}"
+                    )
+                    items(viewModel.bleDevices.value) { bleDevice ->
+                        BLEDeviceItem(bleDevice)
+                    }
                 }
-
-                Spacer(modifier = Modifier.padding(20.dp))
-
-                Button(onClick = {
-                    viewModel.stopScan()
-                }) {
-                    Text(text = "Stop Scan")
-                }
-            }
-
-            LazyColumn(
-                modifier = bottomModifier,
-                contentPadding = PaddingValues (
-                    vertical = 10.dp,
-                    horizontal = 10.dp
-                )
-            ) {
-                Log.d(AppConstants.TAG, "bleDevices in view: ${viewModel.bleDevices.value.size}")
-                items(viewModel.bleDevices.value) { bleDevice ->
-                    BLEDeviceItem(bleDevice)
+            } else {
+                if (viewModel.scanStarted.value) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize(),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        CircularProgressIndicator()
+                    }
                 }
             }
         }

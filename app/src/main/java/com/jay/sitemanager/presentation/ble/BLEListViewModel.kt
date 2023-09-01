@@ -19,32 +19,44 @@ import kotlin.concurrent.scheduleAtFixedRate
 
 @HiltViewModel
 class BLEListViewModel @Inject constructor (): ViewModel() {
+    companion object {
+        private const val refreshDuration = 1000L
+    }
 
     var bleFacade: BLEFacade? = null
     val _bleDevices = mutableStateOf(emptyList<BLEDevice>())
     val bleDevices: State<List<BLEDevice>>
         get() = _bleDevices
-    var timer: Timer? = null
+
+    val _scanStarted = mutableStateOf(false)
+    val scanStarted: State<Boolean>
+        get() = _scanStarted
+
+    var refreshTimer: Timer? = null
 
     private val errorHandler = CoroutineExceptionHandler { _, exception ->
         exception.printStackTrace()
         Log.d("SM", "errorHandler: ${exception.message}"   )
     }
     fun startScan() {
-        bleFacade?.startScan()
-        getBLEDevicesOnSchedule()
+        if (refreshTimer == null) {
+            _scanStarted.value = true
+            bleFacade?.startScan()
+            getBLEDevicesOnSchedule()
+        }
     }
 
     fun stopScan() {
-        timer?.cancel()
-        timer = null
+        _scanStarted.value = false
+        refreshTimer?.cancel()
+        refreshTimer = null
         bleFacade?.stopScan()
         _bleDevices.value = emptyList()
     }
 
     fun getBLEDevicesOnSchedule () {
-        timer = Timer()
-        timer?.scheduleAtFixedRate( object : TimerTask() {
+        refreshTimer = Timer()
+        refreshTimer?.scheduleAtFixedRate( object : TimerTask() {
             override fun run() {
                 viewModelScope.launch(errorHandler) {
                     val devices = bleFacade?.getBLEDevices() ?: emptyList()
@@ -53,7 +65,7 @@ class BLEListViewModel @Inject constructor (): ViewModel() {
                     Log.d(AppConstants.TAG, "bleDevices in viewModel: ${_bleDevices.value.size}")
                 }
             }
-        }, 1000, 2000)
+        }, refreshDuration, refreshDuration)
     }
 
 }
