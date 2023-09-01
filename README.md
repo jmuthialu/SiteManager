@@ -14,15 +14,10 @@
 
 - Ability to start and stop the scan.
 
-## Demo
+## Demo Video
 
 
-https://github.com/jmuthialu/SiteManager/assets/10758530/cb71f038-da1c-44d8-a273-12a40b5680c6
-
-**Vid2**
-
-https://github.com/jmuthialu/SiteManager/assets/10758530/2ba72159-aad8-47fc-8854-df35814a96ae
-
+https://github.com/jmuthialu/SiteManager/assets/10758530/3abd176f-2014-4304-84e6-91f7ec68c57e
 
 
 
