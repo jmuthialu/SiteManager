@@ -1,14 +1,19 @@
 package com.jay.sitemanager.dataModels
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
 data class RemoteUser(
+    @PrimaryKey()
     val id: Int?,
     val name: String?,
     val username: String?,
     val email: String?,
-    val address: Address?,
     val phone: String?,
-    val website: String?,
-    val company: Company?
+//    val address: Address?,
+//    val website: String?,
+//    val company: Company?
 )
 
 data class Address(
