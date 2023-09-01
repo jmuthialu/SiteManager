@@ -10,6 +10,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.jay.sitemanager.ble.BLEFacade
+import com.jay.sitemanager.navigationInfrastructure.AppFrameView
 import com.jay.sitemanager.ui.theme.SiteManagerTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -39,7 +40,7 @@ class MainActivity : ComponentActivity() {
                         android.Manifest.permission.BLUETOOTH_SCAN)
 
                     val context = getApplication().applicationContext
-                    AppFrame(context = context, bleFacade = bleFacade)
+                    AppFrameView(context = context, bleFacade = bleFacade)
                 }
             }
         }

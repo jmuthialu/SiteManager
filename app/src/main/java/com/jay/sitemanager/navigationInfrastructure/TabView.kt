@@ -1,4 +1,4 @@
-package com.jay.sitemanager
+package com.jay.sitemanager.navigationInfrastructure
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Tab
