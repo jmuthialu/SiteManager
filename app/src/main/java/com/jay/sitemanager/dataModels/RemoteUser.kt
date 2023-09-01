@@ -14,7 +14,15 @@ data class RemoteUser(
     val website: String?,
     val address: Address?,
     val company: Company?
-)
+) {
+    fun getAddressString(): String {
+        return "${address?.street}, ${address?.suite}, ${address?.city}, ${address?.zipcode}"
+    }
+
+    fun getCompanyString(): String {
+        return "${company?.name}, ${company?.catchPhrase}, ${company?.bs}"
+    }
+}
 
 data class Address(
     val street: String?,
