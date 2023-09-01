@@ -25,4 +25,5 @@ class LocalUserListViewModel @Inject constructor(
         _usersState.value = localUsers
     }
 
+
 }

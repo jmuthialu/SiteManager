@@ -33,7 +33,7 @@ class UserRepository @Inject constructor(
 
     fun getRemoteUser(id: Int?): RemoteUser? {
         val user = remoteUsers.find { it.id == id }
-        Log.d("$$$", "getUser: $user")
+        Log.d("$$$", "getRemoteUser: $user")
         return user
     }
 
@@ -52,5 +52,11 @@ class UserRepository @Inject constructor(
         val usersType = object : TypeToken<List<LocalUser>>() {}.type
         localUsers = Gson().fromJson(usersJsonString, usersType)
         return  localUsers
+    }
+
+    fun getLocalUser(id: Int?): LocalUser? {
+        val user = localUsers.find { it.id == id }
+        Log.d("$$$", "getLocalUser: $user")
+        return user
     }
 }

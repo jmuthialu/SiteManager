@@ -30,6 +30,8 @@ import androidx.navigation.navArgument
 import com.jay.sitemanager.ble.BLEFacade
 import com.jay.sitemanager.presentation.ble.BLEListView
 import com.jay.sitemanager.presentation.ble.BLEListViewModel
+import com.jay.sitemanager.presentation.users.localUsers.LocalUserDetailView
+import com.jay.sitemanager.presentation.users.localUsers.LocalUserDetailViewModel
 import com.jay.sitemanager.presentation.users.localUsers.LocalUserListViewModel
 import com.jay.sitemanager.presentation.users.localUsers.LocalUsersListView
 import com.jay.sitemanager.presentation.users.remoteUsers.RemoteUserDetailView
@@ -93,22 +95,27 @@ fun NavGraph(navController: NavHostController,
             remoteUserListViewModel.getRemoteUsers()
             TabView(
                 titles = listOf("Local Users", "Remote Users"),
-                localUserView = { LocalUsersListView(
-                    usersState = localUserViewModel.usersState.value,
-                    bottomModifier = bottomModifier
-                ) },
-                remoteUserView = { RemoteUsersListView(
-                    usersState = remoteUserListViewModel.usersState.value,
-                    bottomModifier = bottomModifier
-                ) { id ->
-                    navController.navigate(Screen.User.route +"/$id")
+                localUserView = {
+                    LocalUsersListView(
+                        usersState = localUserViewModel.usersState.value,
+                        bottomModifier = bottomModifier
+                    ) { id ->
+                        navController.navigate(Screen.User.route + "local/$id")
+                    }
+                },
+                remoteUserView = {
+                    RemoteUsersListView(
+                        usersState = remoteUserListViewModel.usersState.value,
+                        bottomModifier = bottomModifier
+                    ) { id ->
+                        navController.navigate(Screen.User.route + "remote/$id")
                     }
                 }
             )
         }
 
         composable(
-            route = Screen.User.route +"/{userId}",
+            route = Screen.User.route +"remote/{userId}",
             arguments = listOf(navArgument("userId") {
                 type = NavType.IntType
             })) { backStackEntry ->
@@ -116,6 +123,17 @@ fun NavGraph(navController: NavHostController,
             val viewModel: RemoteUserDetailViewModel = hiltViewModel()
             val user = viewModel.getUser(userId)
             RemoteUserDetailView(user = user)
+        }
+
+        composable(
+            route = Screen.User.route +"local/{userId}",
+            arguments = listOf(navArgument("userId") {
+                type = NavType.IntType
+            })) { backStackEntry ->
+            val userId = backStackEntry.arguments?.get("userId") as Int?
+            val viewModel: LocalUserDetailViewModel = hiltViewModel()
+            val user = viewModel.getUser(userId)
+            LocalUserDetailView(user = user)
         }
     }
 }
