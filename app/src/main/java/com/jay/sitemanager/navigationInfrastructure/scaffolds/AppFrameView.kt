@@ -1,4 +1,4 @@
-package com.jay.sitemanager.navigationInfrastructure
+package com.jay.sitemanager.navigationInfrastructure.scaffolds
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -11,6 +11,9 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.jay.sitemanager.ble.BLEFacade
+import com.jay.sitemanager.navigationInfrastructure.AppBottomNavigationBar
+import com.jay.sitemanager.navigationInfrastructure.NavGraph
+import com.jay.sitemanager.navigationInfrastructure.Screen
 import kotlinx.coroutines.InternalCoroutinesApi
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")

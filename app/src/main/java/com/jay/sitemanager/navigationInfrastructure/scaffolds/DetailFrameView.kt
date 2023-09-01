@@ -1,4 +1,4 @@
-package com.jay.sitemanager.navigationInfrastructure
+package com.jay.sitemanager.navigationInfrastructure.scaffolds
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons

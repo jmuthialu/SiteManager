@@ -29,6 +29,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import com.jay.sitemanager.AppConstants
 import com.jay.sitemanager.dataModels.BLEDevice
+import com.jay.sitemanager.presentation.components.IconRenderer
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -79,22 +80,13 @@ fun BLEDeviceItem(item: BLEDevice) {
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.padding(10.dp)
         ) {
-            BLEIcon(image = Icons.Default.AccountBox , modifier = Modifier.weight(0.15f))
+            IconRenderer(image = Icons.Default.AccountBox , modifier = Modifier.weight(0.15f))
             BLECell(address = item.address,
                 rssi = item.rssi,
                 modifier = Modifier.weight(0.85f))
         }
 
     }
-}
-
-@Composable
-fun BLEIcon(image: ImageVector, modifier: Modifier) {
-    Image(
-        imageVector = image,
-        contentDescription = "Restaurant icon",
-        modifier = modifier
-    )
 }
 
 @Composable

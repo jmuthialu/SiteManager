@@ -20,6 +20,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import com.jay.sitemanager.dataModels.RemoteUser
+import com.jay.sitemanager.presentation.components.IconRenderer
+import com.jay.sitemanager.presentation.components.UserCell
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -53,7 +55,7 @@ fun UserItem(item: RemoteUser, onclick: (Int) -> Unit = {}) {
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.padding(10.dp)
         ) {
-            UserIcon(image = Icons.Filled.Person, modifier = Modifier.weight(0.15f))
+            IconRenderer(image = Icons.Filled.Person, modifier = Modifier.weight(0.15f))
             UserCell(name = item.name,
                     userName = item.username,
                     email = item.email,
@@ -62,28 +64,5 @@ fun UserItem(item: RemoteUser, onclick: (Int) -> Unit = {}) {
             )
         }
 
-    }
-}
-
-@Composable
-fun UserIcon(image: ImageVector, modifier: Modifier) {
-    Image(
-        imageVector = image,
-        contentDescription = "Restaurant icon",
-        modifier = modifier
-    )
-}
-
-@Composable
-fun UserCell(name: String?,
-             userName: String?,
-             email: String?,
-             phone: String?,
-             modifier: Modifier) {
-    Column(modifier = modifier) {
-        name.let { Text(text = it ?: "", style = MaterialTheme.typography.bodyMedium) }
-        userName.let { Text(text = it ?: "", style = MaterialTheme.typography.bodySmall) }
-        email.let { Text(text = it ?: "", style = MaterialTheme.typography.bodySmall) }
-        phone.let { Text(text = it ?: "", style = MaterialTheme.typography.bodySmall) }
     }
 }

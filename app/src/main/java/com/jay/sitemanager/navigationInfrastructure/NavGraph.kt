@@ -12,6 +12,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.jay.sitemanager.ble.BLEFacade
+import com.jay.sitemanager.navigationInfrastructure.scaffolds.DetailFrameView
+import com.jay.sitemanager.navigationInfrastructure.scaffolds.ListFrameView
 import com.jay.sitemanager.presentation.ble.BLEListView
 import com.jay.sitemanager.presentation.ble.BLEListViewModel
 import com.jay.sitemanager.presentation.users.localUsers.LocalUserDetailView
@@ -31,7 +33,7 @@ fun NavGraph(navController: NavHostController,
 ) {
     NavHost(navController = navController, startDestination = Screen.User.route) {
 
-        // Tabbed Remote and Local User route
+        // Route to tabbed Remote and Local Users
         composable(route = Screen.User.route) {
             val localUserViewModel: LocalUserListViewModel = hiltViewModel()
             localUserViewModel.getLocalUsers(context = context)
@@ -58,7 +60,7 @@ fun NavGraph(navController: NavHostController,
             )
         }
 
-        // Remote User Detail Route
+        // Route to Remote User Detail View
         composable(
             route = Screen.RemoteUserDetail.route + "/{userId}",
             arguments = listOf(navArgument("userId") {
@@ -76,7 +78,7 @@ fun NavGraph(navController: NavHostController,
 
         }
 
-        // Local User Detail Route
+        // Route to Local User Detail View
         composable(
             route = Screen.LocalUserDetail.route + "/{userId}",
             arguments = listOf(navArgument("userId") {
@@ -94,7 +96,7 @@ fun NavGraph(navController: NavHostController,
 
         }
 
-        // BLE Screen route
+        // Route to BLE Scanner View
         composable(route = Screen.Bluetooth.route) {
             val bleViewModel: BLEListViewModel = hiltViewModel()
             bleViewModel.bleFacade = bleFacade

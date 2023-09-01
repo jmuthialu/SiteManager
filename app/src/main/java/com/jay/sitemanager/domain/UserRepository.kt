@@ -20,6 +20,7 @@ class UserRepository @Inject constructor(
 
     var remoteUsers = emptyList<RemoteUser>()
     var localUsers = emptyList<LocalUser>()
+
     suspend fun getRemoteUsers(): List<RemoteUser> {
         return withContext(Dispatchers.IO) {
             remoteUsers = emptyList<RemoteUser>()
@@ -40,10 +41,10 @@ class UserRepository @Inject constructor(
 
     fun getLocalUsers(context: Context): List<LocalUser> {
         var usersJsonString = ""
-        localUsers = emptyList<LocalUser>()
+        localUsers = emptyList()
 
         try {
-            usersJsonString = context.assets.open("users.json")
+            usersJsonString = context.assets.open(AppConstants.LOCAL_USERS_FILE_NAME)
                 .bufferedReader()
                 .use { it.readText() }
         } catch (ioException: IOException) {

@@ -28,9 +28,11 @@ fun AppBottomNavigationBar(
     items: List<Screen>
 ) {
     BottomNavigation {
+
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route
         Log.d(AppConstants.TAG, "currentRoute: $currentRoute")
+
         items.forEach { item ->
             BottomNavigationItem(
                 icon = { Icon(imageVector = item.icon, contentDescription = null) },

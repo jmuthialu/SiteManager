@@ -15,8 +15,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.jay.sitemanager.dataModels.LocalUser
-import com.jay.sitemanager.presentation.users.remoteUsers.UserCell
-import com.jay.sitemanager.presentation.users.remoteUsers.UserIcon
+import com.jay.sitemanager.presentation.components.IconRenderer
+import com.jay.sitemanager.presentation.components.UserCell
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -50,7 +50,7 @@ fun UserItem(item: LocalUser, onclick: (Int) -> Unit = {}) {
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.padding(10.dp)
         ) {
-            UserIcon(image = Icons.Filled.Person, modifier = Modifier.weight(0.15f))
+            IconRenderer(image = Icons.Filled.Person, modifier = Modifier.weight(0.15f))
             UserCell(name = item.name,
                     userName = item.username,
                     email = item.email,

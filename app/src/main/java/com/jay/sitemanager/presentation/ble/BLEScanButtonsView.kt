@@ -11,6 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.jay.sitemanager.AppConstants
+import java.lang.Appendable
 
 @Composable
 fun BLEScanButtonsView(viewModel: BLEListViewModel) {
@@ -25,7 +27,7 @@ fun BLEScanButtonsView(viewModel: BLEListViewModel) {
         Button(onClick = {
             viewModel.startScan()
         }) {
-            Text(text = "Start Scan")
+            Text(text = AppConstants.START_SCAN)
         }
 
         Spacer(modifier = Modifier.padding(20.dp))
@@ -33,7 +35,7 @@ fun BLEScanButtonsView(viewModel: BLEListViewModel) {
         Button(onClick = {
             viewModel.stopScan()
         }) {
-            Text(text = "Stop Scan")
+            Text(text = AppConstants.STOP_SCAN)
         }
     }
 }
