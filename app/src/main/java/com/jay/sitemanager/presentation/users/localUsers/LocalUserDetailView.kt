@@ -15,7 +15,7 @@ import com.jay.sitemanager.dataModels.RemoteUser
 fun LocalUserDetailView(title: MutableState<String>, user: LocalUser?, modifier: Modifier) {
 
     title.value = user?.name?.let { it } ?: run { "" }
-    
+
     Column(
         modifier = modifier
             .fillMaxSize()
