@@ -5,6 +5,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.jay.sitemanager.AppConstants
 import com.jay.sitemanager.ble.BLEFacade
 import com.jay.sitemanager.dataModels.BLEDevice
 import com.jay.sitemanager.domain.UserRepository
@@ -49,7 +50,7 @@ class BLEListViewModel @Inject constructor (): ViewModel() {
                     val devices = bleFacade?.getBLEDevices() ?: emptyList()
                     _bleDevices.value = emptyList()
                     _bleDevices.value = devices
-                    Log.d("$$$", "bleDevices in viewModel: ${_bleDevices.value.size}")
+                    Log.d(AppConstants.TAG, "bleDevices in viewModel: ${_bleDevices.value.size}")
                 }
             }
         }, 1000, 2000)

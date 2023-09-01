@@ -13,14 +13,12 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.util.Log
 import androidx.core.app.ActivityCompat
+import com.jay.sitemanager.AppConstants
 import com.jay.sitemanager.dataModels.BLEDevice
 import java.util.HashMap
 import javax.inject.Singleton
 
 class BLEFacade(private val context: Context) {
-    companion object {
-        const val TAG = "SBD"
-    }
 
     private val bluetoothManager =
         context.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
@@ -38,9 +36,9 @@ class BLEFacade(private val context: Context) {
         if (bluetoothAdapter?.bluetoothLeScanner != null) {
             bleScanner = bluetoothAdapter?.bluetoothLeScanner
             scanSettings = bleScanSettings()
-            Log.d(TAG, "isBluetoothRadioEnabled: ${isBluetoothRadioEnabled()}")
+            Log.d(AppConstants.TAG, "isBluetoothRadioEnabled: ${isBluetoothRadioEnabled()}")
         } else {
-            Log.d(TAG, "BLEFacade: bluetoothLeScanner is null")
+            Log.d(AppConstants.TAG, "BLEFacade: bluetoothLeScanner is null")
         }
     }
 
@@ -64,7 +62,7 @@ class BLEFacade(private val context: Context) {
                 Manifest.permission.BLUETOOTH_SCAN
             ) == PackageManager.PERMISSION_GRANTED
         ) {
-            Log.d(TAG, "startScan...")
+            Log.d(AppConstants.TAG, "startScan...")
             bleScanner?.startScan(scanFilters, scanSettings, bleScanCallback)
         }
     }
@@ -75,7 +73,7 @@ class BLEFacade(private val context: Context) {
                 Manifest.permission.BLUETOOTH_SCAN
             ) == PackageManager.PERMISSION_GRANTED
         ) {
-            Log.d(TAG, "stopScan...")
+            Log.d(AppConstants.TAG, "stopScan...")
             bleScanner?.stopScan(bleScanCallback)
         }
     }
@@ -92,18 +90,18 @@ class BLEFacade(private val context: Context) {
                 scanResultDictionary[address] = result
                 val bleDevice = BLEDevice(address, serviceUUID, rssi)
                 bleDevices.add(bleDevice)
-                Log.d(TAG, "$$$ BLE Device added: $bleDevice - Total count: ${bleDevices.size}")
+                Log.d(AppConstants.TAG, "BLE Device added: $bleDevice - Total count: ${bleDevices.size}")
             } else {
                 // Update RSSI if device already exists
                 bleDevices.filter { it.address == address }.forEach {
                     it.rssi = rssi
-                    Log.d(TAG, "$$$ BLE Device updated: $it")
+                    Log.d(AppConstants.TAG, "$$$ BLE Device updated: $it")
                 }
             }
         }
 
         override fun onScanFailed(errorCode: Int) {
-            Log.d(TAG, "onScanFailed with error code: $errorCode")
+            Log.d(AppConstants.TAG, "onScanFailed with error code: $errorCode")
             super.onScanFailed(errorCode)
         }
     }

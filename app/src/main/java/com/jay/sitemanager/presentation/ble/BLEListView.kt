@@ -25,6 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
+import com.jay.sitemanager.AppConstants
 import com.jay.sitemanager.dataModels.BLEDevice
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -67,7 +68,7 @@ fun BLEListView(viewModel: BLEListViewModel, bottomModifier: Modifier) {
                     horizontal = 10.dp
                 )
             ) {
-                Log.d("$$$", "bleDevices in view: ${viewModel.bleDevices.value.size}")
+                Log.d(AppConstants.TAG, "bleDevices in view: ${viewModel.bleDevices.value.size}")
                 items(viewModel.bleDevices.value) { bleDevice ->
                     BLEDeviceItem(bleDevice)
                 }

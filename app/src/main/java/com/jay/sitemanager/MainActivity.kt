@@ -23,7 +23,7 @@ class MainActivity : ComponentActivity() {
         registerForActivityResult(
             ActivityResultContracts.RequestPermission()
         ) { isGranted: Boolean ->
-            Log.d("$$$", "permission grant status: $isGranted")
+            Log.d(AppConstants.TAG, "permission grant status: $isGranted")
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.jay.sitemanager.AppConstants
 import com.jay.sitemanager.dataModels.LocalUser
 import com.jay.sitemanager.dataModels.RemoteUser
 import kotlinx.coroutines.Dispatchers
@@ -25,7 +26,7 @@ class UserRepository @Inject constructor(
             try {
                 remoteUsers = userApiInterface.getRemoteUsers()
             } catch (e: Exception) {
-                Log.d("$$$", "Exception: ${e.message}")
+                Log.d(AppConstants.TAG, "Exception: ${e.message}")
             }
             return@withContext remoteUsers
         }
@@ -33,7 +34,7 @@ class UserRepository @Inject constructor(
 
     fun getRemoteUser(id: Int?): RemoteUser? {
         val user = remoteUsers.find { it.id == id }
-        Log.d("$$$", "getRemoteUser: $user")
+        Log.d(AppConstants.TAG, "getRemoteUser: $user")
         return user
     }
 
@@ -56,7 +57,7 @@ class UserRepository @Inject constructor(
 
     fun getLocalUser(id: Int?): LocalUser? {
         val user = localUsers.find { it.id == id }
-        Log.d("$$$", "getLocalUser: $user")
+        Log.d(AppConstants.TAG, "getLocalUser: $user")
         return user
     }
 }

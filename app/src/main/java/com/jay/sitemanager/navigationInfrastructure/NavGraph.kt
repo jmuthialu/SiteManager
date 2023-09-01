@@ -23,7 +23,6 @@ import com.jay.sitemanager.presentation.users.remoteUsers.RemoteUserDetailViewMo
 import com.jay.sitemanager.presentation.users.remoteUsers.RemoteUserListViewModel
 import com.jay.sitemanager.presentation.users.remoteUsers.RemoteUsersListView
 
-
 @Composable
 fun NavGraph(navController: NavHostController,
              context: Context,
