@@ -37,15 +37,15 @@ import com.jay.sitemanager.dataModels.RemoteUser
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun BLEListView(viewModel: BLEListViewModel) {
+fun BLEListView(viewModel: BLEListViewModel, bottomModifier: Modifier) {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
                 title = { Text(text = "BLE Devices") }
             )
         }
-    ) { innerPadding ->
-        Column(modifier = Modifier.padding(innerPadding)) {
+    ) { topPadding ->
+        Column(modifier = Modifier.padding(topPadding)) {
             Row (
                 modifier = Modifier
                     .padding(10.dp)
@@ -69,6 +69,7 @@ fun BLEListView(viewModel: BLEListViewModel) {
             }
 
             LazyColumn(
+                modifier = bottomModifier,
                 contentPadding = PaddingValues (
                     vertical = 10.dp,
                     horizontal = 10.dp
@@ -79,7 +80,6 @@ fun BLEListView(viewModel: BLEListViewModel) {
                     BLEDeviceItem(bleDevice)
                 }
             }
-
         }
     }
 }

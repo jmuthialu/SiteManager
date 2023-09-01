@@ -11,18 +11,22 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 
 @Composable
-fun TabView(localUserView: @Composable () -> Unit, remoteUserView: @Composable () -> Unit) {
-    var tabIndex by remember { mutableStateOf(0) } // 1.
-    val tabTitles = listOf("Local", "Remote")
-    Column { // 2.
-        TabRow(selectedTabIndex = tabIndex) { // 3.
+fun TabView(
+    titles: List<String>,
+    localUserView: @Composable () -> Unit,
+    remoteUserView: @Composable () -> Unit
+) {
+    var tabIndex by remember { mutableStateOf(0) }
+    val tabTitles = titles
+    Column {
+        TabRow(selectedTabIndex = tabIndex) {
             tabTitles.forEachIndexed { index, title ->
-                Tab(selected = tabIndex == index, // 4.
+                Tab(selected = tabIndex == index,
                     onClick = { tabIndex = index },
-                    text = { Text(text = title) }) // 5.
+                    text = { Text(text = title) })
             }
         }
-        when (tabIndex) { // 6.
+        when (tabIndex) {
             0 -> localUserView()
             1 -> remoteUserView()
         }

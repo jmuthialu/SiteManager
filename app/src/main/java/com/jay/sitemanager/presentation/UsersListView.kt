@@ -24,8 +24,9 @@ import com.jay.sitemanager.dataModels.RemoteUser
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun UsersListView(usersState: List<RemoteUser>) {
+fun UsersListView(usersState: List<RemoteUser>, bottomModifier: Modifier) {
     LazyColumn(
+        modifier = bottomModifier,
         contentPadding = PaddingValues(
             vertical = 10.dp,
             horizontal = 10.dp

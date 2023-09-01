@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.icons.Icons
@@ -16,6 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
@@ -56,8 +58,40 @@ fun AppFrame(context: Context, bleFacade: BLEFacade) {
         bottomBar = {
             AppBottomNavigationBar(navController, bottomNavItems)
         },
-    ) {
-        NavGraph(navController = navController, context = context, bleFacade = bleFacade)
+    ) { bottomPadding ->
+        NavGraph(navController = navController,
+            context = context,
+            bleFacade = bleFacade,
+            bottomModifier = Modifier.padding(bottomPadding)
+        )
+    }
+}
+
+@Composable
+fun NavGraph(navController: NavHostController,
+             context: Context,
+             bleFacade: BLEFacade,
+             bottomModifier : Modifier
+) {
+    NavHost(navController = navController, startDestination = Screen.Bluetooth.route) {
+
+        composable(route = Screen.Bluetooth.route) {
+            val bleViewModel: BLEListViewModel = hiltViewModel()
+            bleViewModel.bleFacade = bleFacade
+            BLEListView(viewModel = bleViewModel, bottomModifier = bottomModifier)
+        }
+
+        composable(route = Screen.User.route) {
+            val localUserViewModel: LocalUserListViewModel = hiltViewModel()
+            localUserViewModel.getLocalUsers(context = context)
+            val remoteUserListViewModel: RemoteUserListViewModel = hiltViewModel()
+            remoteUserListViewModel.getRemoteUsers()
+            TabView(
+                titles = listOf("Local Users", "Remote Users"),
+                localUserView = { UsersListView(usersState = localUserViewModel.usersState.value, bottomModifier = bottomModifier) },
+                remoteUserView = { UsersListView(usersState = remoteUserListViewModel.usersState.value, bottomModifier = bottomModifier) }
+            )
+        }
     }
 }
 
@@ -94,27 +128,6 @@ private fun AppBottomNavigationBar(
                     }
                 }
             )
-        }
-    }
-}
-
-@Composable
-fun NavGraph(navController: NavHostController, context: Context, bleFacade: BLEFacade) {
-    NavHost(navController = navController, startDestination = Screen.Bluetooth.route) {
-
-        composable(route = Screen.Bluetooth.route) {
-            val bleViewModel: BLEListViewModel = hiltViewModel()
-            bleViewModel.bleFacade = bleFacade
-            BLEListView(viewModel = bleViewModel)
-        }
-
-        composable(route = Screen.User.route) {
-            val localUserViewModel: LocalUserListViewModel = hiltViewModel()
-            localUserViewModel.getLocalUsers(context = context)
-            val remoteUserListViewModel: RemoteUserListViewModel = hiltViewModel()
-            remoteUserListViewModel.getRemoteUsers()
-            TabView(localUserView = { UsersListView(usersState = localUserViewModel.usersState.value) },
-                remoteUserView = { UsersListView(usersState = remoteUserListViewModel.usersState.value) })
         }
     }
 }
