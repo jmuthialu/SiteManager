@@ -75,8 +75,8 @@ fun NavGraph(navController: NavHostController,
             val userId = backStackEntry.arguments?.get("userId") as Int?
             val viewModel: RemoteUserDetailViewModel = hiltViewModel()
             val user = viewModel.getUser(userId)
-//            RemoteUserDetailView(user = user)
 
+            // userName is used to set the title of the detail screen which will be updated by RemoteUserDetailView
             val userName = remember { mutableStateOf("") }
             DetailFrameView(title = userName, onBackClick = { navController.navigateUp() }) { modifier ->
                 RemoteUserDetailView(title = userName, user = user, modifier = modifier)
@@ -93,7 +93,13 @@ fun NavGraph(navController: NavHostController,
             val userId = backStackEntry.arguments?.get("userId") as Int?
             val viewModel: LocalUserDetailViewModel = hiltViewModel()
             val user = viewModel.getUser(userId)
-            LocalUserDetailView(user = user)
+
+            // userName is used to set the title of the detail screen which will be updated by LocalUserDetailView
+            val userName = remember { mutableStateOf("") }
+            DetailFrameView(title = userName, onBackClick = { navController.navigateUp() }) { modifier ->
+                LocalUserDetailView(title = userName, user = user, modifier = modifier)
+            }
+
         }
     }
 }
