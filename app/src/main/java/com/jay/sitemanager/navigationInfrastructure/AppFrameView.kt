@@ -23,8 +23,8 @@ fun AppFrameView(context: Context, bleFacade: BLEFacade) {
 
     val navController = rememberNavController()
     val bottomNavItems = listOf(
-        Screen.Bluetooth,
         Screen.User,
+        Screen.Bluetooth,
     )
     Scaffold(
         bottomBar = {

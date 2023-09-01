@@ -30,14 +30,7 @@ fun NavGraph(navController: NavHostController,
              bleFacade: BLEFacade,
              bottomModifier : Modifier
 ) {
-    NavHost(navController = navController, startDestination = Screen.Bluetooth.route) {
-
-        // Home Screen route
-        composable(route = Screen.Bluetooth.route) {
-            val bleViewModel: BLEListViewModel = hiltViewModel()
-            bleViewModel.bleFacade = bleFacade
-            BLEListView(viewModel = bleViewModel, bottomModifier = bottomModifier)
-        }
+    NavHost(navController = navController, startDestination = Screen.User.route) {
 
         // Tabbed Remote and Local User route
         composable(route = Screen.User.route) {
@@ -100,6 +93,13 @@ fun NavGraph(navController: NavHostController,
                 LocalUserDetailView(title = userName, user = user, modifier = modifier)
             }
 
+        }
+
+        // BLE Screen route
+        composable(route = Screen.Bluetooth.route) {
+            val bleViewModel: BLEListViewModel = hiltViewModel()
+            bleViewModel.bleFacade = bleFacade
+            BLEListView(viewModel = bleViewModel, bottomModifier = bottomModifier)
         }
     }
 }
