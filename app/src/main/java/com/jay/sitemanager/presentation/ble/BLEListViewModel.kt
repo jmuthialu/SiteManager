@@ -1,4 +1,4 @@
-package com.jay.sitemanager.presentation
+package com.jay.sitemanager.presentation.ble
 
 import android.util.Log
 import androidx.compose.runtime.State

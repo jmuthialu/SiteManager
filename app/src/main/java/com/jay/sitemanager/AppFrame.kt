@@ -21,16 +21,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.jay.sitemanager.ble.BLEFacade
-import com.jay.sitemanager.presentation.BLEListView
-import com.jay.sitemanager.presentation.BLEListViewModel
-import com.jay.sitemanager.presentation.LocalUserListViewModel
-import com.jay.sitemanager.presentation.RemoteUserListViewModel
-import com.jay.sitemanager.presentation.UsersListView
+import com.jay.sitemanager.presentation.ble.BLEListView
+import com.jay.sitemanager.presentation.ble.BLEListViewModel
+import com.jay.sitemanager.presentation.users.LocalUserListViewModel
+import com.jay.sitemanager.presentation.users.RemoteUserListViewModel
+import com.jay.sitemanager.presentation.users.UserDetailView
+import com.jay.sitemanager.presentation.users.UserDetailViewModel
+import com.jay.sitemanager.presentation.users.UsersListView
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.InternalCoroutinesApi
@@ -88,9 +92,29 @@ fun NavGraph(navController: NavHostController,
             remoteUserListViewModel.getRemoteUsers()
             TabView(
                 titles = listOf("Local Users", "Remote Users"),
-                localUserView = { UsersListView(usersState = localUserViewModel.usersState.value, bottomModifier = bottomModifier) },
-                remoteUserView = { UsersListView(usersState = remoteUserListViewModel.usersState.value, bottomModifier = bottomModifier) }
+                localUserView = { UsersListView(
+                    usersState = localUserViewModel.usersState.value,
+                    bottomModifier = bottomModifier
+                ) },
+                remoteUserView = { UsersListView(
+                    usersState = remoteUserListViewModel.usersState.value,
+                    bottomModifier = bottomModifier
+                ) { id ->
+                    navController.navigate("usersList/$id")
+                    }
+                }
             )
+        }
+
+        composable(
+            route = "usersList/{userId}",
+            arguments = listOf(navArgument("userId") {
+                type = NavType.IntType
+            })) { backStackEntry ->
+            val userId = backStackEntry.arguments?.get("userId") as Int?
+            val viewModel: UserDetailViewModel = hiltViewModel()
+            val user = viewModel.getUser(userId)
+            UserDetailView(user = user)
         }
     }
 }

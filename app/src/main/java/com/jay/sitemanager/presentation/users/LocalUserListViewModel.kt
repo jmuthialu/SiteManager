@@ -1,17 +1,14 @@
-package com.jay.sitemanager.presentation
+package com.jay.sitemanager.presentation.users
 
 import android.content.Context
 import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.jay.sitemanager.dataModels.RemoteUser
 import com.jay.sitemanager.domain.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.launch
 import java.io.IOException
 import javax.inject.Inject
 
