@@ -18,6 +18,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.jay.sitemanager.ble.BLEFacade
+import com.jay.sitemanager.presentation.BLEListView
 import com.jay.sitemanager.presentation.BLEListViewModel
 import com.jay.sitemanager.presentation.UserListViewModel
 import com.jay.sitemanager.presentation.UsersListView
@@ -64,15 +65,21 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun SiteManagerNavigation(context: Context, bleFacade: BLEFacade) {
+
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "usersList") {
+
+//        composable(route = "usersList") {
+//            val viewModel: UserListViewModel = hiltViewModel()
+//            viewModel.getRemoteUsers()
+//            UsersListView(usersState = viewModel.usersState.value)
+//        }
+
         composable(route = "usersList") {
-            val viewModel: UserListViewModel = hiltViewModel()
-            val bleVM: BLEListViewModel = hiltViewModel()
-            bleVM.bleFacade = bleFacade
-            bleVM.startScan()
-            viewModel.getRemoteUsers()
-            UsersListView(usersState = viewModel.usersState.value)
+            val bleViewModel: BLEListViewModel = hiltViewModel()
+            bleViewModel.bleFacade = bleFacade
+            bleViewModel.startScan()
+            BLEListView(bleDevices = bleViewModel._bleDevices)
         }
     }
 }
