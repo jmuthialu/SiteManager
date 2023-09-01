@@ -20,21 +20,21 @@ fun RemoteUserDetailView(title: MutableState<String>, user: RemoteUser?, modifie
             .fillMaxSize()
             .padding(20.dp)
     ) {
-//        user?.address?.street.let {
-//            Text(text = "Street: $it")
-//        }
-//
-//        user?.address?.geo?.lat.let {
-//            Text(text = "Lat: $it")
-//        }
-//
-//        user?.address?.geo?.lng.let {
-//            Text(text = "Lon: $it")
-//        }
-//
-//        user?.company?.name?.let {
-//            Text(text = "Company Name: $it")
-//        }
+        user?.address?.street.let {
+            Text(text = "Street: $it")
+        }
+
+        user?.address?.geo?.lat.let {
+            Text(text = "Lat: $it")
+        }
+
+        user?.address?.geo?.lng.let {
+            Text(text = "Lon: $it")
+        }
+
+        user?.company?.name?.let {
+            Text(text = "Company Name: $it")
+        }
 
     }
 

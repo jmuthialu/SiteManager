@@ -11,9 +11,9 @@ data class RemoteUser(
     val username: String?,
     val email: String?,
     val phone: String?,
-//    val address: Address?,
-//    val website: String?,
-//    val company: Company?
+    val website: String?,
+    val address: Address?,
+    val company: Company?
 )
 
 data class Address(
