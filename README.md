@@ -19,6 +19,10 @@
 
 https://github.com/jmuthialu/SiteManager/assets/10758530/cb71f038-da1c-44d8-a273-12a40b5680c6
 
+**Vid2**
+
+https://github.com/jmuthialu/SiteManager/assets/10758530/2ba72159-aad8-47fc-8854-df35814a96ae
+
 
 
 
