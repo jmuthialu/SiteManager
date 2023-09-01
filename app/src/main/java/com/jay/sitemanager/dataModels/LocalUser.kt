@@ -5,4 +5,5 @@ data class LocalUser(
     val name: String?,
     val username: String?,
     val email: String?,
+    val phone: String?,
 )

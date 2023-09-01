@@ -8,4 +8,5 @@ import com.jay.sitemanager.dataModels.RemoteUser
 fun RemoteUserDetailView(user: RemoteUser?) {
 
     Text(text = user?.name ?: "No Name")
+
 }

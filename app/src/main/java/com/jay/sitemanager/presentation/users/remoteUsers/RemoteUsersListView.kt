@@ -55,8 +55,11 @@ fun UserItem(item: RemoteUser, onclick: (Int) -> Unit = {}) {
         ) {
             UserIcon(image = Icons.Filled.Person, modifier = Modifier.weight(0.15f))
             UserCell(name = item.name,
-                userName = item.username,
-                modifier = Modifier.weight(0.85f))
+                    userName = item.username,
+                    email = item.email,
+                    phone = item.phone,
+                    modifier = Modifier.weight(0.85f)
+            )
         }
 
     }
@@ -72,9 +75,15 @@ fun UserIcon(image: ImageVector, modifier: Modifier) {
 }
 
 @Composable
-fun UserCell(name: String?, userName: String?, modifier: Modifier) {
+fun UserCell(name: String?,
+             userName: String?,
+             email: String?,
+             phone: String?,
+             modifier: Modifier) {
     Column(modifier = modifier) {
-        Text(text = (name ?: "no name" ), style = MaterialTheme.typography.bodyMedium)
-        Text(text = (userName ?: "no userName"), style = MaterialTheme.typography.bodySmall)
+        name.let { Text(text = it ?: "", style = MaterialTheme.typography.bodyMedium) }
+        userName.let { Text(text = it ?: "", style = MaterialTheme.typography.bodySmall) }
+        email.let { Text(text = it ?: "", style = MaterialTheme.typography.bodySmall) }
+        phone.let { Text(text = it ?: "", style = MaterialTheme.typography.bodySmall) }
     }
 }

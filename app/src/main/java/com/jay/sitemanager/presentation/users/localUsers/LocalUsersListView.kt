@@ -52,8 +52,11 @@ fun UserItem(item: LocalUser, onclick: (Int) -> Unit = {}) {
         ) {
             UserIcon(image = Icons.Filled.Person, modifier = Modifier.weight(0.15f))
             UserCell(name = item.name,
-                userName = item.username,
-                modifier = Modifier.weight(0.85f))
+                    userName = item.username,
+                    email = item.email,
+                    phone = item.phone,
+                    modifier = Modifier.weight(0.85f)
+            )
         }
 
     }
