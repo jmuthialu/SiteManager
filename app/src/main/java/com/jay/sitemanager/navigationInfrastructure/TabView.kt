@@ -11,10 +11,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 
 @Composable
-fun TabView(
+fun TwoTabView(
     titles: List<String>,
-    localUserView: @Composable () -> Unit,
-    remoteUserView: @Composable () -> Unit
+    view1: @Composable () -> Unit,
+    view2: @Composable () -> Unit,
 ) {
     var tabIndex by remember { mutableStateOf(0) }
     val tabTitles = titles
@@ -27,8 +27,8 @@ fun TabView(
             }
         }
         when (tabIndex) {
-            0 -> localUserView()
-            1 -> remoteUserView()
+            0 -> view1()
+            1 -> view2()
         }
     }
 }

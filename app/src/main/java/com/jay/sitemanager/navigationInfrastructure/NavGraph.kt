@@ -11,6 +11,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.jay.sitemanager.AppConstants
 import com.jay.sitemanager.ble.BLEFacade
 import com.jay.sitemanager.navigationInfrastructure.scaffolds.DetailFrameView
 import com.jay.sitemanager.navigationInfrastructure.scaffolds.ListFrameView
@@ -39,22 +40,22 @@ fun NavGraph(navController: NavHostController,
             localUserViewModel.getLocalUsers(context = context)
             val remoteUserListViewModel: RemoteUserListViewModel = hiltViewModel()
             remoteUserListViewModel.getRemoteUsers()
-            TabView(
-                titles = listOf("Local Users", "Remote Users"),
-                localUserView = {
-                    LocalUsersListView(
-                        usersState = localUserViewModel.usersState.value,
-                        bottomModifier = bottomModifier
-                    ) { id ->
-                        navController.navigate(Screen.LocalUserDetail.route + "/$id")
-                    }
-                },
-                remoteUserView = {
+            TwoTabView(
+                titles = listOf(AppConstants.REMOTE_USERS, AppConstants.LOCAL_USERS),
+                view1 = {
                     RemoteUsersListView(
                         usersState = remoteUserListViewModel.usersState.value,
                         bottomModifier = bottomModifier
                     ) { id ->
                         navController.navigate(Screen.RemoteUserDetail.route + "/$id")
+                    }
+                },
+                view2 = {
+                    LocalUsersListView(
+                        usersState = localUserViewModel.usersState.value,
+                        bottomModifier = bottomModifier
+                    ) { id ->
+                        navController.navigate(Screen.LocalUserDetail.route + "/$id")
                     }
                 }
             )
