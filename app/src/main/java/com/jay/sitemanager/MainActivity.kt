@@ -36,11 +36,7 @@ class MainActivity : ComponentActivity() {
         registerForActivityResult(
             ActivityResultContracts.RequestPermission()
         ) { isGranted: Boolean ->
-            if (isGranted) {
-                Log.d("$$$", "permission granted")
-            } else {
-                Log.d("$$$", "permission NOT granted")
-            }
+            Log.d("$$$", "permission grant status: $isGranted")
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,6 +47,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+
                     bleFacade = BLEFacade(this)
                     requestPermissionLauncher.launch(
                         android.Manifest.permission.BLUETOOTH_SCAN)
@@ -67,19 +64,19 @@ class MainActivity : ComponentActivity() {
 fun SiteManagerNavigation(context: Context, bleFacade: BLEFacade) {
 
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = "usersList") {
-
-//        composable(route = "usersList") {
-//            val viewModel: UserListViewModel = hiltViewModel()
-//            viewModel.getRemoteUsers()
-//            UsersListView(usersState = viewModel.usersState.value)
-//        }
+    NavHost(navController = navController, startDestination = "bleList") {
 
         composable(route = "usersList") {
+            val viewModel: UserListViewModel = hiltViewModel()
+            viewModel.getRemoteUsers()
+            UsersListView(usersState = viewModel.usersState.value)
+        }
+
+        composable(route = "bleList") {
             val bleViewModel: BLEListViewModel = hiltViewModel()
             bleViewModel.bleFacade = bleFacade
             bleViewModel.startScan()
-            BLEListView(bleDevices = bleViewModel._bleDevices)
+            BLEListView(bleDevices = bleViewModel.bleDevices)
         }
     }
 }

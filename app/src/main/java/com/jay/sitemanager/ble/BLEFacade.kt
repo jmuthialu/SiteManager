@@ -17,10 +17,9 @@ import com.jay.sitemanager.dataModels.BLEDevice
 import java.util.HashMap
 import javax.inject.Singleton
 
-class BLEFacade(context: Context) {
-
+class BLEFacade(private val context: Context) {
     companion object {
-        const val TAG = "$$$"
+        const val TAG = "SBD"
     }
 
     private val bluetoothManager =
@@ -37,7 +36,6 @@ class BLEFacade(context: Context) {
 
     init {
         if (bluetoothAdapter?.bluetoothLeScanner != null) {
-            Log.d(TAG, "BLEFacade: bluetoothLeScanner is NOT null")
             bleScanner = bluetoothAdapter?.bluetoothLeScanner
             scanSettings = bleScanSettings()
             Log.d(TAG, "isBluetoothRadioEnabled: ${isBluetoothRadioEnabled()}")
@@ -52,26 +50,37 @@ class BLEFacade(context: Context) {
         return scanSettingsBuilder.build()
     }
 
-    fun isBluetoothRadioEnabled(): Boolean {
+    private fun isBluetoothRadioEnabled(): Boolean {
         return bluetoothAdapter?.isEnabled ?: false
-    }
-
-    @SuppressLint("MissingPermission")
-    fun startScan() {
-        Log.d(TAG, "startScan called")
-        bleScanner?.startScan(scanFilters, scanSettings, bleScanCallback)
-    }
-
-    @SuppressLint("MissingPermission")
-    fun stopScan() {
-        bleScanner?.stopScan(bleScanCallback)
     }
 
     fun getBLEDevices(): List<BLEDevice> {
         return bleDevices
     }
 
-    private val bleScanCallback: ScanCallback = object : ScanCallback() {
+    fun startScan() {
+        if (ActivityCompat.checkSelfPermission(
+                context,
+                Manifest.permission.BLUETOOTH_SCAN
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            Log.d(TAG, "startScan...")
+            bleScanner?.startScan(scanFilters, scanSettings, bleScanCallback)
+        }
+    }
+
+    fun stopScan() {
+        if (ActivityCompat.checkSelfPermission(
+                context,
+                Manifest.permission.BLUETOOTH_SCAN
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            Log.d(TAG, "stopScan...")
+            bleScanner?.stopScan(bleScanCallback)
+        }
+    }
+
+    val bleScanCallback: ScanCallback = object : ScanCallback() {
 
         override fun onScanResult(callbackType: Int, result: ScanResult) {
             val address = result.device.address

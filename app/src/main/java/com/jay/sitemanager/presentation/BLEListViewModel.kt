@@ -1,6 +1,7 @@
 package com.jay.sitemanager.presentation
 
 import android.util.Log
+import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,15 +17,13 @@ import javax.inject.Inject
 import kotlin.concurrent.scheduleAtFixedRate
 
 @HiltViewModel
-class BLEListViewModel @Inject constructor (
-    private val userRepository: UserRepository
-): ViewModel() {
+class BLEListViewModel @Inject constructor (): ViewModel() {
 
     var bleFacade: BLEFacade? = null
     val _bleDevices = mutableStateOf(emptyList<BLEDevice>())
-    val bleDevices = _bleDevices
+    val bleDevices: State<List<BLEDevice>>
+        get() = _bleDevices
     var timer: Timer? = null
-    var toggle = true
 
     private val errorHandler = CoroutineExceptionHandler { _, exception ->
         exception.printStackTrace()
@@ -32,8 +31,6 @@ class BLEListViewModel @Inject constructor (
     }
     fun startScan() {
         bleFacade?.startScan()
-//        val devices = bleFacade?.getBLEDevices() ?: emptyList()
-//        _bleDevices.value = devices
         getBLEDevicesOnSchedule()
     }
 
@@ -49,15 +46,12 @@ class BLEListViewModel @Inject constructor (
             override fun run() {
                 viewModelScope.launch(errorHandler) {
                     val devices = bleFacade?.getBLEDevices() ?: emptyList()
-                    Log.d(
-                        "$$$",
-                        "bleDevices in vieModel: ${_bleDevices.value.size} - ${Thread.currentThread()}")
                     _bleDevices.value = emptyList()
                     _bleDevices.value = devices
+                    Log.d("$$$", "bleDevices in viewModel: ${_bleDevices.value.size}")
                 }
-
             }
-        }, 1000, 1000)
+        }, 1000, 2000)
     }
 
 }
