@@ -15,6 +15,7 @@ import android.util.Log
 import androidx.core.app.ActivityCompat
 import com.jay.sitemanager.dataModels.BLEDevice
 import java.util.HashMap
+import javax.inject.Singleton
 
 class BLEFacade(context: Context) {
 
@@ -64,6 +65,10 @@ class BLEFacade(context: Context) {
     @SuppressLint("MissingPermission")
     fun stopScan() {
         bleScanner?.stopScan(bleScanCallback)
+    }
+
+    fun getBLEDevices(): List<BLEDevice> {
+        return bleDevices
     }
 
     private val bleScanCallback: ScanCallback = object : ScanCallback() {

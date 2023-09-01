@@ -13,6 +13,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 import java.io.IOException
+import java.util.Timer
+import java.util.TimerTask
 import javax.inject.Inject
 
 @HiltViewModel
@@ -35,6 +37,7 @@ class UserListViewModel @Inject constructor(
     }
 
     fun getLocalUsers(context: Context) {
+
         var usersJsonString = ""
         try {
             usersJsonString = context.assets.open("users.json")
@@ -46,4 +49,5 @@ class UserListViewModel @Inject constructor(
         val usersType = object : TypeToken<List<RemoteUser>>() {}.type
         _usersState.value = Gson().fromJson(usersJsonString, usersType)
     }
+
 }

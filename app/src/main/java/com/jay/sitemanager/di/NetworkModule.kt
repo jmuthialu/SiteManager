@@ -1,5 +1,6 @@
 package com.jay.sitemanager.di
 
+import com.jay.sitemanager.ble.BLEFacade
 import com.jay.sitemanager.domain.UserApiInterface
 import dagger.Module
 import dagger.Provides
