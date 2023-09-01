@@ -61,7 +61,7 @@ fun BLEListView(viewModel: BLEListViewModel) {
                 }
 
                 Spacer(modifier = Modifier.padding(20.dp))
-                
+
                 Button(onClick = {
                     viewModel.stopScan()
                 }) {

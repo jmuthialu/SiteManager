@@ -53,29 +53,9 @@ class MainActivity : ComponentActivity() {
                         android.Manifest.permission.BLUETOOTH_SCAN)
 
                     val context = getApplication().applicationContext
-                    SiteManagerNavigation(context = context, bleFacade = bleFacade)
+                    AppFrame(context = context, bleFacade = bleFacade)
                 }
             }
-        }
-    }
-}
-
-@Composable
-fun SiteManagerNavigation(context: Context, bleFacade: BLEFacade) {
-
-    val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = "bleList") {
-
-        composable(route = "usersList") {
-            val viewModel: UserListViewModel = hiltViewModel()
-            viewModel.getRemoteUsers()
-            UsersListView(usersState = viewModel.usersState.value)
-        }
-
-        composable(route = "bleList") {
-            val bleViewModel: BLEListViewModel = hiltViewModel()
-            bleViewModel.bleFacade = bleFacade
-            BLEListView(viewModel = bleViewModel)
         }
     }
 }
