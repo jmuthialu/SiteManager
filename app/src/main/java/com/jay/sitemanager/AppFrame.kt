@@ -37,7 +37,7 @@ import kotlinx.coroutines.InternalCoroutinesApi
 
 
 sealed class Screen(val route: String, val label: String, val icon: ImageVector) {
-    object Bluetooth : Screen("bleList", "BLE", Icons.Filled.AccountBox)
+    object Bluetooth : Screen("bleList", "BT Scanner", Icons.Filled.AccountBox)
     object User : Screen("usersList", "Users", Icons.Filled.List)
 }
 
