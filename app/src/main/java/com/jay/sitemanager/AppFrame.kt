@@ -46,6 +46,8 @@ import kotlinx.coroutines.InternalCoroutinesApi
 sealed class Screen(val route: String, val label: String, val icon: ImageVector) {
     object Bluetooth : Screen("bleList", "BT Scanner", Icons.Filled.AccountBox)
     object User : Screen("usersList", "Users", Icons.Filled.List)
+    object RemoteUserDetail : Screen("usersList/remote", "RemoteUserDetail", Icons.Filled.List)
+    object LocalUserDetail : Screen("usersList/local", "LocalUserDetail", Icons.Filled.List)
 }
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -100,7 +102,7 @@ fun NavGraph(navController: NavHostController,
                         usersState = localUserViewModel.usersState.value,
                         bottomModifier = bottomModifier
                     ) { id ->
-                        navController.navigate(Screen.User.route + "local/$id")
+                        navController.navigate(Screen.LocalUserDetail.route + "/$id")
                     }
                 },
                 remoteUserView = {
@@ -108,14 +110,14 @@ fun NavGraph(navController: NavHostController,
                         usersState = remoteUserListViewModel.usersState.value,
                         bottomModifier = bottomModifier
                     ) { id ->
-                        navController.navigate(Screen.User.route + "remote/$id")
+                        navController.navigate(Screen.RemoteUserDetail.route + "/$id")
                     }
                 }
             )
         }
 
         composable(
-            route = Screen.User.route +"remote/{userId}",
+            route = Screen.RemoteUserDetail.route + "/{userId}",
             arguments = listOf(navArgument("userId") {
                 type = NavType.IntType
             })) { backStackEntry ->
@@ -126,7 +128,7 @@ fun NavGraph(navController: NavHostController,
         }
 
         composable(
-            route = Screen.User.route +"local/{userId}",
+            route = Screen.LocalUserDetail.route + "/{userId}",
             arguments = listOf(navArgument("userId") {
                 type = NavType.IntType
             })) { backStackEntry ->
