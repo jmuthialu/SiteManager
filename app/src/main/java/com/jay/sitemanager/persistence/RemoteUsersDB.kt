@@ -1,8 +1,7 @@
-package com.jay.sitemanager.persistance
+package com.jay.sitemanager.persistence
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
 import com.jay.sitemanager.dataModels.RemoteUser
 
 @Database(

@@ -7,7 +7,7 @@ import com.google.gson.reflect.TypeToken
 import com.jay.sitemanager.AppConstants
 import com.jay.sitemanager.dataModels.LocalUser
 import com.jay.sitemanager.dataModels.RemoteUser
-import com.jay.sitemanager.persistance.RemoteUsersDao
+import com.jay.sitemanager.persistence.RemoteUsersDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.IOException

@@ -1,4 +1,4 @@
-package com.jay.sitemanager.persistance
+package com.jay.sitemanager.persistence
 
 import androidx.room.Dao
 import androidx.room.Insert

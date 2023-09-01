@@ -2,9 +2,8 @@ package com.jay.sitemanager.di
 
 import android.content.Context
 import androidx.room.Room
-import com.jay.sitemanager.dataModels.RemoteUser
-import com.jay.sitemanager.persistance.RemoteUsersDB
-import com.jay.sitemanager.persistance.RemoteUsersDao
+import com.jay.sitemanager.persistence.RemoteUsersDB
+import com.jay.sitemanager.persistence.RemoteUsersDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
