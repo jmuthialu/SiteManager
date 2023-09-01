@@ -38,6 +38,7 @@ class BLEListViewModel @Inject constructor (): ViewModel() {
         timer?.cancel()
         timer = null
         bleFacade?.stopScan()
+        _bleDevices.value = emptyList()
     }
 
     fun getBLEDevicesOnSchedule () {

@@ -75,8 +75,7 @@ fun SiteManagerNavigation(context: Context, bleFacade: BLEFacade) {
         composable(route = "bleList") {
             val bleViewModel: BLEListViewModel = hiltViewModel()
             bleViewModel.bleFacade = bleFacade
-            bleViewModel.startScan()
-            BLEListView(bleDevices = bleViewModel.bleDevices)
+            BLEListView(viewModel = bleViewModel)
         }
     }
 }
