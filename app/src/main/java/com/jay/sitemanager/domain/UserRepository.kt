@@ -7,6 +7,7 @@ import com.google.gson.reflect.TypeToken
 import com.jay.sitemanager.AppConstants
 import com.jay.sitemanager.dataModels.LocalUser
 import com.jay.sitemanager.dataModels.RemoteUser
+import com.jay.sitemanager.persistance.RemoteUsersDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.IOException
@@ -15,7 +16,8 @@ import javax.inject.Singleton
 
 @Singleton
 class UserRepository @Inject constructor(
-    private val userApiInterface: UserApiInterface
+    private val userApiInterface: UserApiInterface,
+    private val remoteUsersDao: RemoteUsersDao
 ) {
 
     var remoteUsers = emptyList<RemoteUser>()
@@ -26,9 +28,11 @@ class UserRepository @Inject constructor(
             remoteUsers = emptyList<RemoteUser>()
             try {
                 remoteUsers = userApiInterface.getRemoteUsers()
+                remoteUsersDao.addAll(remoteUsers)
             } catch (e: Exception) {
                 Log.d(AppConstants.TAG, "Exception: ${e.message}")
             }
+            remoteUsers = remoteUsersDao.getAll()
             return@withContext remoteUsers
         }
     }
