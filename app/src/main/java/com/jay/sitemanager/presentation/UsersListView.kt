@@ -10,7 +10,10 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Card
+import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -19,16 +22,26 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import com.jay.sitemanager.dataModels.RemoteUser
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun UsersListView(usersState: List<RemoteUser>) {
-    LazyColumn(
-        contentPadding = PaddingValues (
-            vertical = 10.dp,
-            horizontal = 10.dp
-        )
-    ) {
-        items(usersState) { user ->
-            UserItem(user)
+    Scaffold(
+        topBar = {
+            CenterAlignedTopAppBar(
+                title = { Text(text = "Users List") }
+            )
+        }
+    ) { innerPadding ->
+        LazyColumn(
+            modifier = Modifier.padding(innerPadding),
+            contentPadding = PaddingValues(
+                vertical = 10.dp,
+                horizontal = 10.dp
+            )
+        ) {
+            items(usersState) { user ->
+                UserItem(user)
+            }
         }
     }
 }

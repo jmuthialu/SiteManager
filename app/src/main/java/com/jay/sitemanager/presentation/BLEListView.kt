@@ -38,7 +38,6 @@ import com.jay.sitemanager.dataModels.RemoteUser
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BLEListView(viewModel: BLEListViewModel) {
-
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
