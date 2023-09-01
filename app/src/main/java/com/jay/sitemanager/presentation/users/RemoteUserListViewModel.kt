@@ -30,7 +30,7 @@ class RemoteUserListViewModel @Inject constructor(
 
     fun getRemoteUsers() {
         viewModelScope.launch(errorHandler) {
-            _usersState.value = userRepository.getUsers()
+            _usersState.value = userRepository.getRemoteUsers()
         }
     }
 

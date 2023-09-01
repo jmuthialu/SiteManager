@@ -6,10 +6,10 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class UserDetailViewModel @Inject constructor(
+class RemoteUserDetailViewModel @Inject constructor(
     private val userRepository: UserRepository
 ): ViewModel() {
 
-    fun getUser(id: Int?) = userRepository.getUser(id)
+    fun getUser(id: Int?) = userRepository.getRemoteUser(id)
 
 }

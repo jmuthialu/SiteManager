@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import com.jay.sitemanager.dataModels.RemoteUser
 
 @Composable
-fun UserDetailView(user: RemoteUser?) {
+fun RemoteUserDetailView(user: RemoteUser?) {
 
     Text(text = user?.name ?: "No Name")
 }

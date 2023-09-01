@@ -19,13 +19,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
+import com.jay.sitemanager.dataModels.LocalUser
 import com.jay.sitemanager.dataModels.RemoteUser
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun UsersListView(usersState: List<RemoteUser>,
-                  bottomModifier: Modifier,
-                  onClick: (Int) -> Unit = {}
+fun LocalUsersListView(usersState: List<LocalUser>,
+                        bottomModifier: Modifier,
+                        onClick: (Int) -> Unit = {}
 ) {
     LazyColumn(
         modifier = bottomModifier,
@@ -41,7 +42,7 @@ fun UsersListView(usersState: List<RemoteUser>,
 }
 
 @Composable
-fun UserItem(item: RemoteUser, onclick: (Int) -> Unit = {}) {
+fun UserItem(item: LocalUser, onclick: (Int) -> Unit = {}) {
     Card(
         modifier = Modifier
             .padding(10.dp)
@@ -59,22 +60,5 @@ fun UserItem(item: RemoteUser, onclick: (Int) -> Unit = {}) {
                 modifier = Modifier.weight(0.85f))
         }
 
-    }
-}
-
-@Composable
-fun UserIcon(image: ImageVector, modifier: Modifier) {
-    Image(
-        imageVector = image,
-        contentDescription = "Restaurant icon",
-        modifier = modifier
-    )
-}
-
-@Composable
-fun UserCell(name: String?, userName: String?, modifier: Modifier) {
-    Column(modifier = modifier) {
-        Text(text = (name ?: "no name" ), style = MaterialTheme.typography.bodyMedium)
-        Text(text = (userName ?: "no userName"), style = MaterialTheme.typography.bodySmall)
     }
 }

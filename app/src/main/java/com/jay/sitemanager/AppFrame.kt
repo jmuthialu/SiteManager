@@ -31,10 +31,11 @@ import com.jay.sitemanager.ble.BLEFacade
 import com.jay.sitemanager.presentation.ble.BLEListView
 import com.jay.sitemanager.presentation.ble.BLEListViewModel
 import com.jay.sitemanager.presentation.users.LocalUserListViewModel
+import com.jay.sitemanager.presentation.users.LocalUsersListView
+import com.jay.sitemanager.presentation.users.RemoteUserDetailView
 import com.jay.sitemanager.presentation.users.RemoteUserListViewModel
-import com.jay.sitemanager.presentation.users.UserDetailView
-import com.jay.sitemanager.presentation.users.UserDetailViewModel
-import com.jay.sitemanager.presentation.users.UsersListView
+import com.jay.sitemanager.presentation.users.RemoteUsersListView
+import com.jay.sitemanager.presentation.users.RemoteUserDetailViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.InternalCoroutinesApi
@@ -92,29 +93,29 @@ fun NavGraph(navController: NavHostController,
             remoteUserListViewModel.getRemoteUsers()
             TabView(
                 titles = listOf("Local Users", "Remote Users"),
-                localUserView = { UsersListView(
+                localUserView = { LocalUsersListView(
                     usersState = localUserViewModel.usersState.value,
                     bottomModifier = bottomModifier
                 ) },
-                remoteUserView = { UsersListView(
+                remoteUserView = { RemoteUsersListView(
                     usersState = remoteUserListViewModel.usersState.value,
                     bottomModifier = bottomModifier
                 ) { id ->
-                    navController.navigate("usersList/$id")
+                    navController.navigate(Screen.User.route +"/$id")
                     }
                 }
             )
         }
 
         composable(
-            route = "usersList/{userId}",
+            route = Screen.User.route +"/{userId}",
             arguments = listOf(navArgument("userId") {
                 type = NavType.IntType
             })) { backStackEntry ->
             val userId = backStackEntry.arguments?.get("userId") as Int?
-            val viewModel: UserDetailViewModel = hiltViewModel()
+            val viewModel: RemoteUserDetailViewModel = hiltViewModel()
             val user = viewModel.getUser(userId)
-            UserDetailView(user = user)
+            RemoteUserDetailView(user = user)
         }
     }
 }
