@@ -16,9 +16,7 @@
 
 ## Demo Video
 
-
-https://github.com/jmuthialu/SiteManager/assets/10758530/3abd176f-2014-4304-84e6-91f7ec68c57e
-
+https://github.com/jmuthialu/SiteManager/assets/10758530/aada59c0-dcfb-4a45-82e7-ce3c21cd39de
 
 
 ## Technologies used
