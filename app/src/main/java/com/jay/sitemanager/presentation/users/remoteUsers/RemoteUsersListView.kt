@@ -1,4 +1,4 @@
-package com.jay.sitemanager.presentation.users
+package com.jay.sitemanager.presentation.users.remoteUsers
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable

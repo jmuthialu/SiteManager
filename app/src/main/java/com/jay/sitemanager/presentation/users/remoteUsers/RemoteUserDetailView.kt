@@ -1,4 +1,4 @@
-package com.jay.sitemanager.presentation.users
+package com.jay.sitemanager.presentation.users.remoteUsers
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable

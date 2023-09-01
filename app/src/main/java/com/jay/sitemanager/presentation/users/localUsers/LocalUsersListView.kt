@@ -1,8 +1,6 @@
-package com.jay.sitemanager.presentation.users
+package com.jay.sitemanager.presentation.users.localUsers
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -12,15 +10,13 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import com.jay.sitemanager.dataModels.LocalUser
-import com.jay.sitemanager.dataModels.RemoteUser
+import com.jay.sitemanager.presentation.users.remoteUsers.UserCell
+import com.jay.sitemanager.presentation.users.remoteUsers.UserIcon
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

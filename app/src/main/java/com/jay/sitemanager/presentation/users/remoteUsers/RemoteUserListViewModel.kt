@@ -1,4 +1,4 @@
-package com.jay.sitemanager.presentation.users
+package com.jay.sitemanager.presentation.users.remoteUsers
 
 import android.content.Context
 import android.util.Log
