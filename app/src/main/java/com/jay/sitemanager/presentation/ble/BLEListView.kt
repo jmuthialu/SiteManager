@@ -32,48 +32,42 @@ import com.jay.sitemanager.dataModels.BLEDevice
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun BLEListView(viewModel: BLEListViewModel, bottomModifier: Modifier) {
-    Scaffold(
-        topBar = {
-            CenterAlignedTopAppBar(
-                title = { Text(text = "BLE Devices") }
-            )
-        }
-    ) { topPadding ->
-        Column(modifier = Modifier.padding(topPadding)) {
+fun BLEListView(viewModel: BLEListViewModel, topModifier: Modifier, bottomModifier: Modifier) {
 
-            BLEScanButtonsView(viewModel = viewModel)
+    Column(modifier = topModifier) {
 
-            if (viewModel.bleDevices.value.isNotEmpty()) {
-                LazyColumn(
-                    modifier = bottomModifier,
-                    contentPadding = PaddingValues(
-                        vertical = 10.dp,
-                        horizontal = 10.dp
-                    )
-                ) {
-                    Log.d(
-                        AppConstants.TAG,
-                        "bleDevices in view: ${viewModel.bleDevices.value.size}"
-                    )
-                    items(viewModel.bleDevices.value) { bleDevice ->
-                        BLEDeviceItem(bleDevice)
-                    }
+        BLEScanButtonsView(viewModel = viewModel)
+
+        if (viewModel.bleDevices.value.isNotEmpty()) {
+            LazyColumn(
+                modifier = bottomModifier,
+                contentPadding = PaddingValues(
+                    vertical = 10.dp,
+                    horizontal = 10.dp
+                )
+            ) {
+                Log.d(
+                    AppConstants.TAG,
+                    "bleDevices in view: ${viewModel.bleDevices.value.size}"
+                )
+                items(viewModel.bleDevices.value) { bleDevice ->
+                    BLEDeviceItem(bleDevice)
                 }
-            } else {
-                if (viewModel.scanStarted.value) {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize(),
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        CircularProgressIndicator()
-                    }
+            }
+        } else {
+            if (viewModel.scanStarted.value) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize(),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    CircularProgressIndicator()
                 }
             }
         }
     }
+
 }
 
 @Composable

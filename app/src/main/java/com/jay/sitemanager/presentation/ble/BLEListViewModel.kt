@@ -20,10 +20,12 @@ import kotlin.concurrent.scheduleAtFixedRate
 @HiltViewModel
 class BLEListViewModel @Inject constructor (): ViewModel() {
     companion object {
+        // Refreshes BLE device list every second from BLEFacade
         private const val refreshDuration = 1000L
     }
 
     var bleFacade: BLEFacade? = null
+
     val _bleDevices = mutableStateOf(emptyList<BLEDevice>())
     val bleDevices: State<List<BLEDevice>>
         get() = _bleDevices
@@ -36,8 +38,9 @@ class BLEListViewModel @Inject constructor (): ViewModel() {
 
     private val errorHandler = CoroutineExceptionHandler { _, exception ->
         exception.printStackTrace()
-        Log.d("SM", "errorHandler: ${exception.message}"   )
+        Log.d(AppConstants.TAG, "errorHandler: ${exception.message}"   )
     }
+
     fun startScan() {
         if (refreshTimer == null) {
             _scanStarted.value = true
@@ -54,6 +57,9 @@ class BLEListViewModel @Inject constructor (): ViewModel() {
         _bleDevices.value = emptyList()
     }
 
+    // BLE Scan runs every few milli seconds but UI is not recommened to update that often
+    // To improve UI performance, BLE Scan is run on a schedule and is updated every second.
+    // This also updates RSSI values for all BLE devices.
     fun getBLEDevicesOnSchedule () {
         refreshTimer = Timer()
         refreshTimer?.scheduleAtFixedRate( object : TimerTask() {

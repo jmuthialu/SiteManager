@@ -98,7 +98,9 @@ fun NavGraph(navController: NavHostController,
         composable(route = Screen.Bluetooth.route) {
             val bleViewModel: BLEListViewModel = hiltViewModel()
             bleViewModel.bleFacade = bleFacade
-            BLEListView(viewModel = bleViewModel, bottomModifier = bottomModifier)
+            ListFrameView(title = Screen.Bluetooth.label) { topModifier ->
+                BLEListView(viewModel = bleViewModel, topModifier, bottomModifier = bottomModifier)
+            }
         }
     }
 }
