@@ -13,29 +13,15 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 import java.io.IOException
-import java.util.Timer
-import java.util.TimerTask
 import javax.inject.Inject
 
 @HiltViewModel
-class UserListViewModel @Inject constructor(
+class LocalUserListViewModel @Inject constructor(
     private val userRepository: UserRepository
 ): ViewModel() {
 
     val _usersState = mutableStateOf(emptyList<RemoteUser>())
     val usersState = _usersState
-
-    private val errorHandler = CoroutineExceptionHandler { _, exception ->
-        exception.printStackTrace()
-        Log.d("SM", "errorHandler: ${exception.message}"   )
-    }
-
-    fun getRemoteUsers() {
-        viewModelScope.launch(errorHandler) {
-            _usersState.value = userRepository.getUsers()
-        }
-    }
-
     fun getLocalUsers(context: Context) {
 
         var usersJsonString = ""

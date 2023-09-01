@@ -26,7 +26,8 @@ import androidx.navigation.compose.rememberNavController
 import com.jay.sitemanager.ble.BLEFacade
 import com.jay.sitemanager.presentation.BLEListView
 import com.jay.sitemanager.presentation.BLEListViewModel
-import com.jay.sitemanager.presentation.UserListViewModel
+import com.jay.sitemanager.presentation.LocalUserListViewModel
+import com.jay.sitemanager.presentation.RemoteUserListViewModel
 import com.jay.sitemanager.presentation.UsersListView
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -108,9 +109,12 @@ fun NavGraph(navController: NavHostController, context: Context, bleFacade: BLEF
         }
 
         composable(route = Screen.User.route) {
-            val viewModel: UserListViewModel = hiltViewModel()
-            viewModel.getRemoteUsers()
-            UsersListView(usersState = viewModel.usersState.value)
+            val localUserViewModel: LocalUserListViewModel = hiltViewModel()
+            localUserViewModel.getLocalUsers(context = context)
+            val remoteUserListViewModel: RemoteUserListViewModel = hiltViewModel()
+            remoteUserListViewModel.getRemoteUsers()
+            TabView(localUserView = { UsersListView(usersState = localUserViewModel.usersState.value) },
+                remoteUserView = { UsersListView(usersState = remoteUserListViewModel.usersState.value) })
         }
     }
 }
